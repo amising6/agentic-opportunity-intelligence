@@ -1,0 +1,15 @@
+[
+  {"provider":"greenhouse","board":"anthropic","organization":"Anthropic","enabled":true},
+  {"provider":"greenhouse","board":"scaleai","organization":"Scale AI","enabled":true},
+  {"provider":"greenhouse","board":"databricks","organization":"Databricks","enabled":true},
+  {"provider":"greenhouse","board":"stripe","organization":"Stripe","enabled":true},
+  {"provider":"greenhouse","board":"coinbase","organization":"Coinbase","enabled":true},
+  {"provider":"greenhouse","board":"figma","organization":"Figma","enabled":true},
+  {"provider":"greenhouse","board":"discord","organization":"Discord","enabled":true},
+  {"provider":"greenhouse","board":"cloudflare","organization":"Cloudflare","enabled":true},
+  {"provider":"greenhouse","board":"airbnb","organization":"Airbnb","enabled":true},
+  {"provider":"greenhouse","board":"reddit","organization":"Reddit","enabled":true},
+  {"provider":"lever","board":"palantir","organization":"Palantir","enabled":true},
+  {"provider":"lever","board":"wealthfront","organization":"Wealthfront","enabled":true},
+  {"provider":"lever","board":"spotify","organization":"Spotify","enabled":true}
+]

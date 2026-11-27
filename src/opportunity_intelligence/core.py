@@ -33,6 +33,7 @@ class Opportunity:
     salary_max: int | None = None
     location: str = "remote"
     source_url: str = ""
+    description: str = ""
 
 def normalized_skills(skills: tuple[str, ...]) -> set[str]:
     return {skill.strip().casefold() for skill in skills if skill.strip()}
