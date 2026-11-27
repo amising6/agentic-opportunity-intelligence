@@ -2,7 +2,7 @@
 
 An extensible Python prototype for **opportunity matching and human-reviewed workflow orchestration**. It demonstrates reusable discovery, screening, checkpointing and approval patterns with entirely fictional opportunities.
 
-> **v0.1.0**: Local runnable prototype. Matching is deterministic, not LLM-powered. No scraping, account access, or automatic applications.
+> **v1.0.0**: Local runnable prototype with automated screening, ranking and brief preparation. Matching is deterministic, not LLM-powered. No scraping, account access, or automatic applications.
 
 ## Features
 
@@ -45,3 +45,7 @@ Authorized discovery feed adapters; optional LLM reasoning; optional Gmail and G
 ## Privacy and licensing
 
 All demo organizations and records are fictional. Do not commit credentials, personal applications, resumes, confidential employer data or screenshots of private dashboards. Licensed under the [MIT License](LICENSE).
+
+## Automated demonstration
+
+Select **Run Intelligence Workflow** on Overview. Eligible discovered records advance through qualification and preparation in skill-coverage order. Download the generated Markdown brief in Workflow review. The workflow stops before human approval; submission is a manually recorded simulation. Re-running skips completed stages. JSON storage is single-process, and reviewer identifiers are not authenticated. No LLM or live discovery is included in this release.
