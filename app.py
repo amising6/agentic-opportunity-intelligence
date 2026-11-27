@@ -8,7 +8,25 @@ from opportunity_intelligence.demo import seed
 
 st.set_page_config(page_title='Opportunity Intelligence', layout='wide')
 ROOT = Path(__file__).resolve().parent
-store = seed(ROOT / 'sample_data', Path(os.environ.get('OPPORTUNITY_STATE', str(ROOT / 'data' / 'demo_state.json'))))
+# Isolate public demo workspaces by browser session.
+if os.environ.get("PUBLIC_DEMO", "true").lower() == "true":
+    import tempfile
+
+    if "workspace_directory" not in st.session_state:
+        st.session_state["workspace_directory"] = tempfile.TemporaryDirectory(
+            prefix="opportunity-demo-"
+        )
+
+    checkpoint = Path(
+        st.session_state["workspace_directory"].name
+    ) / "demo_state.json"
+else:
+    checkpoint = Path(os.environ.get(
+        "OPPORTUNITY_STATE",
+        str(ROOT / "data" / "demo_state.json")
+    ))
+
+store = seed(ROOT / 'sample_data', checkpoint)
 state = store.load()
 records = list(state['records'].values())
 rows = pd.DataFrame([{'ID':r['id'],'Opportunity':r['title'],'Organization':r['organization'],'Location':r['location'],'Salary ceiling':r['salary_max'],'Fit (%)':r['evaluation']['match_score'],'Screening':'Eligible' if r['evaluation']['qualified'] else 'Not eligible','Stage':r['stage']} for r in records])
