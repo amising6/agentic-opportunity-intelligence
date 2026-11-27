@@ -8,11 +8,17 @@ The platform demonstrates reusable patterns for live discovery, screening, ranki
 ![Python](https://img.shields.io/badge/Python-3.10%2B-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
-## Live Demo
+## Live Applications
 
-[Launch Agentic Opportunity Intelligence](https://de-copilot-opportunity-intelligence.streamlit.app)
+| Application | Launch |
+|---|---|
+| Agentic Opportunity Intelligence | [Launch Demo](https://de-copilot-opportunity-intelligence.streamlit.app) |
+| Live Greenhouse Discovery | [Launch Demo](https://de-copilot-live-discovery.streamlit.app) |
+| STTM Factory | [Launch Demo](https://de-copilot-sttm-factory.streamlit.app) |
 
-[Data Engineering Copilot](https://dataengineeringcopilot.com)
+The Opportunity Intelligence demo uses synthetic data.
+The Live Discovery application retrieves public job
+postings through Greenhouse and Lever APIs.
 
 The public interactive demonstration uses synthetic opportunities. Live discovery capabilities are available through the Python backend.
 
@@ -88,7 +94,7 @@ streamlit run app.py
 
 Open the local URL printed by Streamlit, usually http://localhost:8501.
 
-## Live Discovery — Python Example
+## Live Discovery  Python Example
 
 ```python
 from opportunity_intelligence.discovery import (
