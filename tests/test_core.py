@@ -18,7 +18,7 @@ def test_duplicate_and_checkpoint(tmp_path):
 
 def test_approval_and_submission_require_evidence(tmp_path):
     store = WorkflowStore(tmp_path / "state.json")
-    store.ingest(Opportunity("one", "Demo", "Example", ()), {})
+    store.ingest(Opportunity("one", "Demo", "Example", ()), {"qualified": True})
     store.transition("one", "qualified")
     store.transition("one", "prepared")
     with pytest.raises(ValueError, match="reviewer"):

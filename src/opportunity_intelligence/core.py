@@ -95,20 +95,30 @@ class WorkflowStore:
         self.save(state)
         return True
 
+    @staticmethod
+    def options(record):
+        if record['stage'] == 'blocked':
+            return {record.get('blocked_from', 'discovered'), 'rejected'}
+        return ALLOWED[record['stage']]
+
     def transition(self, opportunity_id: str, new_stage: str, *,
                    approved_by: str | None = None,
-                   confirmation: str | None = None) -> None:
+                   confirmation: str | None = None, reason: str | None = None) -> None:
         state = self.load()
         record = state["records"].get(opportunity_id)
         if record is None:
             raise KeyError(f"Unknown opportunity: {opportunity_id}")
         prior = record["stage"]
-        if new_stage not in ALLOWED[prior]:
+        if new_stage not in self.options(record):
             raise ValueError(f"Invalid workflow transition: {prior} -> {new_stage}")
-        if new_stage == "approved" and not approved_by:
+        if new_stage == "qualified" and not record["evaluation"].get("qualified", False):
+            raise ValueError("Screening constraints not met")
+        if new_stage == "approved" and not (approved_by or "").strip():
             raise ValueError("An identified human reviewer is required for approval")
-        if new_stage == "submitted" and not confirmation:
+        if new_stage == "submitted" and not (confirmation or "").strip():
             raise ValueError("An externally obtained confirmation reference is required")
+        if new_stage == "blocked":
+            record["blocked_from"] = prior
         record["stage"] = new_stage
         if confirmation:
             record["confirmation"] = confirmation
@@ -118,5 +128,7 @@ class WorkflowStore:
             "from": prior,
             "to": new_stage,
             "approved_by": approved_by,
+            "confirmation": confirmation,
+            "reason": reason,
         })
         self.save(state)

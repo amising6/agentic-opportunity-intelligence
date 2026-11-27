@@ -3,7 +3,7 @@ from pathlib import Path
 import os
 import pandas as pd
 import streamlit as st
-from opportunity_intelligence.core import ALLOWED
+from opportunity_intelligence.orchestrator import run_workflow
 from opportunity_intelligence.demo import seed
 
 st.set_page_config(page_title='Opportunity Intelligence', layout='wide')
@@ -30,6 +30,11 @@ if page == 'Overview':
         st.subheader('Workflow stages');st.bar_chart(rows.Stage.value_counts())
     with b:
         st.subheader('Screening outcomes');st.bar_chart(rows.Screening.value_counts())
+    if st.button('Run Intelligence Workflow', type='primary'):
+        count = run_workflow(ROOT / 'sample_data', store.path)
+        st.session_state['run_result'] = f'{count} opportunities prepared for human review.'
+        st.rerun()
+    if 'run_result' in st.session_state: st.success(st.session_state['run_result'])
     st.subheader('Top ranked opportunities');st.dataframe(rows.head(10),hide_index=True,use_container_width=True)
     if st.button('Advance eligible discovered records to qualified'):
         for r in records:
@@ -54,15 +59,19 @@ elif page == 'Workflow review':
     selected=st.selectbox('Opportunity',list(rows.ID),format_func=lambda key:f"{key} — {state['records'][key]['title']}")
     record=state['records'][selected];evaluation=record['evaluation']
     st.write('Current stage:',record['stage']);st.write('Matched skills:',', '.join(evaluation['matched']) or 'None');st.write('Missing skills:',', '.join(evaluation['missing']) or 'None')
-    options=sorted(ALLOWED[record['stage']])
+    st.write('Salary constraint:', evaluation['salary_ok']); st.write('Location constraint:', evaluation['location_ok'])
+    if record.get('brief'):
+        st.markdown(record['brief']); st.download_button('Download opportunity brief', record['brief'], selected + '.md')
+    options=sorted(store.options(record), key=lambda x: (x in ('blocked','rejected'), x))
     if not evaluation['qualified']: options=[x for x in options if x not in ('qualified','prepared','approved')]
     if options:
         destination=st.selectbox('Next stage',options)
         reviewer=st.text_input('Reviewer identifier') if destination=='approved' else None
         confirmation=st.text_input('Demo external confirmation reference') if destination=='submitted' else None
+        reason=st.text_input('Reason') if destination in ('blocked','rejected') else None
         if st.button('Save transition'):
             try:
-                store.transition(selected,destination,approved_by=reviewer,confirmation=confirmation);st.rerun()
+                store.transition(selected,destination,approved_by=reviewer,confirmation=confirmation,reason=reason);st.rerun()
             except (ValueError,KeyError) as exc: st.error(str(exc))
     else: st.info('No available transitions.')
 else:
