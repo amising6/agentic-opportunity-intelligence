@@ -33,7 +33,33 @@ Open the local URL printed by Streamlit (usually http://localhost:8501). The fir
 `discovered → qualified → prepared → approved → submitted`
 
 Records can also become `blocked` or `rejected`. Approval requires a reviewer identifier. Submission requires an externally obtained confirmation reference. The application **records** that reference; it does not independently validate it or send an application.
+## Live Opportunity Discovery — v1.1.0
 
+Agentic Opportunity Intelligence now supports live job discovery through the Greenhouse public Job Board API, with additional Lever integration.
+
+### Capabilities
+
+- Configurable registry of 13 company career sources.
+- Parallel retrieval of publicly available opportunities.
+- Job description and skill extraction.
+- Keyword normalization and location-based filtering.
+- Opportunity deduplication.
+- Source-level execution reporting and error handling.
+- Standardized opportunity data model.
+
+### Architecture
+
+Public Job Board APIs → Source Adapters → Parallel Discovery Engine → Opportunity Filtering → Standardized Opportunity Model
+
+### Privacy and Governance
+
+The integration retrieves publicly available job postings without requiring personal credentials or automated access to restricted platforms.
+
+The public Streamlit demonstration continues to use synthetic data. Live discovery is currently available through the Python backend.
+
+### Release
+
+[View v1.1.0 — Greenhouse Integration](https://github.com/amising6/agentic-opportunity-intelligence/releases/tag/v1.1.0)
 ## Architecture
 
 See [Architecture and trust boundaries](docs/architecture.md).
