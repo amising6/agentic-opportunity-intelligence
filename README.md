@@ -33,7 +33,7 @@ Open the local URL printed by Streamlit (usually http://localhost:8501). The fir
 `discovered → qualified → prepared → approved → submitted`
 
 Records can also become `blocked` or `rejected`. Approval requires a reviewer identifier. Submission requires an externally obtained confirmation reference. The application **records** that reference; it does not independently validate it or send an application.
-## Live Opportunity Discovery — v1.1.0
+## Live Opportunity Discovery  v1.1.0
 
 Agentic Opportunity Intelligence now supports live job discovery through the Greenhouse public Job Board API, with additional Lever integration.
 
