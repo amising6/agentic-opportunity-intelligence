@@ -1,0 +1,44 @@
+[
+  {
+    "id": "demo-001",
+    "title": "Principal Data Platform Engineer",
+    "organization": "Northstar Demo Labs",
+    "required_skills": [
+      "Python",
+      "SQL",
+      "AWS",
+      "APIs"
+    ],
+    "salary_max": 205000,
+    "location": "remote",
+    "source_url": ""
+  },
+  {
+    "id": "demo-002",
+    "title": "AI Workflow Architect",
+    "organization": "Example Systems",
+    "required_skills": [
+      "Python",
+      "workflow orchestration",
+      "APIs",
+      "Kubernetes"
+    ],
+    "salary_max": 190000,
+    "location": "New York",
+    "source_url": ""
+  },
+  {
+    "id": "demo-003",
+    "title": "Enterprise Integration Lead",
+    "organization": "Fictional Analytics Co.",
+    "required_skills": [
+      "Java",
+      "Kafka",
+      "Kubernetes",
+      "Terraform"
+    ],
+    "salary_max": 130000,
+    "location": "Boston",
+    "source_url": ""
+  }
+]

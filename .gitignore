@@ -221,3 +221,10 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Opportunity Intelligence local state
+/data/
+.env
+.env.*
+!.env.example
+.venv/

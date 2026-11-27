@@ -1,0 +1,15 @@
+{
+  "skills": [
+    "Python",
+    "SQL",
+    "AWS",
+    "data modeling",
+    "APIs",
+    "workflow orchestration"
+  ],
+  "min_salary": 140000,
+  "locations": [
+    "remote",
+    "New York"
+  ]
+}
